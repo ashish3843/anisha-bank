@@ -26,14 +26,91 @@
       </div>
     </div>
     <div id="txn-area">
-        <h3>Transaction Area</h3>
+      <div class="row">
+        <div class="col-md-4">
+          <div class="deposit status">
+            <h4>Deposit</h4>
+            <h2>tk <span id="currentDeposit">00</span></h2>
+            <!--taking span tag as we will not select "tk"-->
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="withdraw status">
+            <h4>Withdraw</h4>
+            <h2>tk 00</h2>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="balance status">
+            <h4>Balance</h4>
+            <h2>tk <span id="currentBalance">1000</span></h2>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="submit-area">
+            <h4>Deposit</h4>
+            <input
+              id="depositAmount"
+              type="text"
+              class="form-control"
+              placeholder="Amount you want to Deposit"
+            />
+            <br />
+            <button id="addDeposit" class="btn btn-success">Deposit</button>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="submit-area">
+            <h4>Withdraw</h4>
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Amount you want to Withraw"
+            />
+            <br />
+            <button class="btn btn-success">Withdraw</button>
+          </div>
+        </div>
+      </div>
     </div>
     <script>
-      document.getElementById("login").addEventListener("click", function () {
+      // login event handler
+      document.getElementById("login").addEventListener("click", function (){
         document.getElementById('login-area').style.display = 'none'; // first page will be hide
+        
         document.getElementById('txn-area').style.display = 'block'; // second page will be show (when click)
       });
-      
+
+      // deposit event handler
+      document.getElementById('addDeposit').addEventListener('click', function () { const depositAmt = document.getElementById('depositAmount').value; // using value for identify the input amount (only for input tag)
+        const amountNum = parseFloat (depositAmt); // for convert amt string to number
+
+
+        // const currentamt = document.getElementById('currentDeposit').innerText; // using innertext for identify the input amount (except input tag)
+        // const currentamtNum = parseFloat (currentamt);  // for convert amt string to number
+        // const totalDeposit = currentamtNum + amountNum; // adding both value
+
+        // document.getElementById('currentDeposit').innerText = totalDeposit; // set the total amount
+
+        // const currentBl = document.getElementById('currentBalance').innerText;
+        // const aurrentBlNum = parseFloat(currentBl);
+        // const totalBalance = amountNum + aurrentBlNum;
+        // document.getElementById('currentBalance').innerText = totalBalance;
+        grandDeposit("currentDeposit", amountNum);
+        grandDeposit("currentBalance", amountNum);
+
+
+        document.getElementById('depositAmount').value = ""; // to clear input value
+      })
+
+      function grandDeposit(id, amountNum) {
+        const currentBl = document.getElementById(id).innerText; // using innertext for identify the input amount (except input tag)
+        const currentBlNum = parseFloat(currentBl); // for convert amt string to number
+        const totalBalance = amountNum + currentBlNum; // adding both value
+        document.getElementById(id).innerText = totalBalance; // set the total amount
+      }
     </script>
   </body>
 </html>

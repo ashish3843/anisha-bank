@@ -10,3 +10,22 @@ body {
 #txn-area{
     display: none;
 }
+.deposit{
+    background-color: limegreen;
+}
+.withdraw{
+    background-color: rgb(230, 59, 28);
+}
+.balance{
+    background-color: lightseagreen;
+}
+.status{
+    margin-top: 5px;
+    height: 150px;
+    width: 280px;
+    padding: 20px;
+    color: white;
+    border-radius: 10px;
+    margin: 5px;
+    
+}
