@@ -37,7 +37,7 @@
         <div class="col-md-4">
           <div class="withdraw status">
             <h4>Withdraw</h4>
-            <h2>tk 00</h2>
+            <h2>tk <span id="currentWithdraw">00</span> </h2>
           </div>
         </div>
         <div class="col-md-4">
@@ -64,13 +64,13 @@
         <div class="col-md-6">
           <div class="submit-area">
             <h4>Withdraw</h4>
-            <input
+            <input id="withrawAmt"
               type="text"
               class="form-control"
               placeholder="Amount you want to Withraw"
             />
             <br />
-            <button class="btn btn-success">Withdraw</button>
+            <button id="addWithdraw" class="btn btn-success">Withdraw</button>
           </div>
         </div>
       </div>
@@ -84,8 +84,10 @@
       });
 
       // deposit event handler
-      document.getElementById('addDeposit').addEventListener('click', function () { const depositAmt = document.getElementById('depositAmount').value; // using value for identify the input amount (only for input tag)
-        const amountNum = parseFloat (depositAmt); // for convert amt string to number
+      document.getElementById('addDeposit').addEventListener('click', function () { 
+        
+        // const depositAmt = document.getElementById('depositAmount').value; // using value for identify the input amount (only for input tag)
+        const amountNum = getInputAmt('depositAmount'); // for convert amt string to number
 
 
         // const currentamt = document.getElementById('currentDeposit').innerText; // using innertext for identify the input amount (except input tag)
@@ -103,7 +105,24 @@
 
 
         document.getElementById('depositAmount').value = ""; // to clear input value
+      }) 
+
+      // withdraw btn even handler
+      document.getElementById('addWithdraw').addEventListener('click', function () {
+        // const withrawAmount = document.getElementById('withrawAmt').value;
+        const withrawNum = getInputAmt('withrawAmt')
+
+        grandDeposit("currentWithdraw", withrawNum);
+        grandDeposit("currentBalance", -1 * withrawNum);
+
+        document.getElementById('withrawAmt').value = "";
       })
+
+      function getInputAmt(id) {
+        const amount = document.getElementById(id).value;
+        const amountNumber = parseFloat(amount);
+        return amountNumber;
+      }
 
       function grandDeposit(id, amountNum) {
         const currentBl = document.getElementById(id).innerText; // using innertext for identify the input amount (except input tag)
